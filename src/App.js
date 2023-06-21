@@ -9,6 +9,7 @@ import ContactUs from './Pages/Home/ContactUs/ContactUs';
 import Reviews from './Pages/Home/Reviews/Reviews';
 import Login from './Pages/Login/Login';
 import SignUp from './Pages/Login/SignUp';
+import Footer from './Pages/Shared/Footer/Footer';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<SignUp></SignUp>}></Route>
       </Routes>
+
+      <Footer></Footer>
     </div>
   );
 }
