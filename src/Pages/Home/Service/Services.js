@@ -46,11 +46,11 @@ const Services = () => {
 
       <section className="container mx-auto  grid justify-items-center md:grid-cols-2 gap-4 py-20 my-28 ">
         <div className='grid justify-items-end'>
-          <img src={treatment} alt="" class="w-[458px] h-[576px] md:w-auto md:h-auto md:w-[322px] md:h-[406px] rounded-lg " />
+          <img src={treatment} alt=""className="w-[458px] h-[576px] md:w-auto md:h-auto md:w-[322px] md:h-[406px] rounded-lg " />
         </div>
 
-        <div class="md:col-span-1 ">
-          <h1 class="text-2xl">Exceptional Dental Care, on Your Terms</h1>
+        <div className="md:col-span-1 ">
+          <h1 className="text-2xl">Exceptional Dental Care, on Your Terms</h1>
           <p>
             It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsumis that it has a more-or-less normal distribution of letters,as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page
           </p>
