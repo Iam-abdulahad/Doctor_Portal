@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -16,6 +16,15 @@ const Login = () => {
           ] = useSignInWithEmailAndPassword(auth);
 
           let signInError;
+          const navigate = useNavigate();
+          const location = useLocation();
+          let from = location.state?.from?.pathname || "/";
+
+          useEffect( () =>{
+                    if (user) {
+                        navigate(from, { replace: true });
+                    }
+                }, [user, from, navigate])
 
           if (error) {
                     signInError = <p className='text-red-500'><small>{error?.message}</small></p>
@@ -59,7 +68,7 @@ const Login = () => {
                                                                                           value={password}
                                                                                           onChange={(e) => setPassword(e.target.value)}
                                                                                 />
-                                                                                 {signInError}
+                                                                                {signInError}
                                                                                 <button
                                                                                           type="submit"
                                                                                           className="transition duration-200 h-14 bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:bg-gradient-to-r from-purple-500 to-pink-500 focus:bg-blue-700 focus:outline-none rounded-lg px-3 py-2 text-white w-full"

@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
           const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
           let signInError;
+
+          const navigate = useNavigate();
+          const location = useLocation();
+          let from = location.state?.from?.pathname || "/";
+
+          useEffect(() => {
+                    if (user) {
+                              navigate(from, { replace: true });
+                    }
+          }, [user, from, navigate])
 
           if (error) {
                     signInError = <p className='text-red-500'><small>{error?.message}</small></p>
