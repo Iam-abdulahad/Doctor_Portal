@@ -14,6 +14,9 @@ const Header = () => {
                 <li> <Link to='/appointment'>Appointment</Link> </li>
                 <li> <Link to='/reviews'>Reviews</Link></li>
                 <li> <Link to='/contact'>Contact Us</Link></li>
+                {
+                        user && <li><Link to="/dashboard">Dashboard</Link></li>
+                }
                 <li>{user ? <button
                         className="btn btn-ghost"
                         onClick={async () => {

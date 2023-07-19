@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
@@ -16,13 +16,22 @@ const SignUp = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
 
   let signUpError;
+  const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user, from, navigate])
 
   if (error) {
     signUpError = <p className='text-red-500'><small>{error?.message}</small></p>
   }
   if (loading) {
     return (
-      <div className='min-h-screen text-center justify-items-center '>
+      <div className='min-h-screen text-center justify-items-center'>
         <span class="loading loading-ball loading-lg"></span>
       </div>
     );

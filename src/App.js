@@ -11,6 +11,12 @@ import SignUp from './Pages/Login/SignUp';
 import Footer from './Pages/Shared/Footer/Footer';
 import Appointment from './Pages/Appointment/Appointment';
 import RequireAuth from './Pages/Login/RequireAuth';
+import Dashboard from './Pages/Dashboard/Dashboard';
+import MyReview from './Pages/Dashboard/MyReview';
+import MyHistory from './Pages/Dashboard/MyHistory';
+import MyAppointments from './Pages/Dashboard/MyAppointments';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -25,6 +31,11 @@ function App() {
             <Appointment></Appointment>
           </RequireAuth>
         }></Route>
+        <Route path="dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} >
+          <Route index element={<MyAppointments></MyAppointments>}></Route>
+          <Route path="review" element={<MyReview></MyReview>}></Route>
+          <Route path="history" element={<MyHistory></MyHistory>}></Route>
+        </Route>
         <Route path='/contact' element={<ContactUs></ContactUs>}></Route>
         <Route path='/reviews' element={<Reviews></Reviews>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
@@ -32,6 +43,7 @@ function App() {
       </Routes>
 
       <Footer></Footer>
+      <ToastContainer />
     </div>
   );
 }

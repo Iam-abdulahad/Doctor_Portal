@@ -11,11 +11,10 @@ const AppointmentService = ({ service, setTreatment }) => {
                                                             ? <span>{slots[0]}</span>
                                                             : <span className='text-red-500'>Try another date.</span>
                                         }</p>
-                                        
                                         <p>{slots.length} {slots.length > 1 ? 'spaces' : 'space'} available</p>
                                         <div className="card-actions justify-center">
                                                   <label
-                                                            for="booking-modal"
+                                                            htmlFor="booking-modal"
                                                             disabled={slots.length === 0}
                                                             onClick={() => setTreatment(service)}
                                                             className="btn btn-sm btn-secondary text-white uppercase bg-gradient-to-r from-secondary to-primary"
