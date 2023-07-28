@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from './SocialLogin';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 
 const SignUp = () => {
   const [displayName, setDisplayName] = useState('');
@@ -16,19 +17,24 @@ const SignUp = () => {
   ] = useCreateUserWithEmailAndPassword(auth);
 
   let signUpError;
+
+  const [token] = useToken(user);
   const navigate = useNavigate();
   const location = useLocation();
+
   let from = location.state?.from?.pathname || "/";
 
   useEffect(() => {
-    if (user) {
+
+    if (token) {
       navigate(from, { replace: true });
     }
-  }, [user, from, navigate])
+  }, [token, from, navigate])
 
   if (error) {
     signUpError = <p className='text-red-500'><small>{error?.message}</small></p>
   }
+
   if (loading) {
     return (
       <div className='min-h-screen text-center justify-items-center'>
@@ -36,13 +42,7 @@ const SignUp = () => {
       </div>
     );
   }
-  if (user) {
-    return (
-      <div>
-        <p>Registered User: {user.user.email}</p>
-      </div>
-    );
-  }
+
   return (
     <div>
       <div className="bg-gray-100 min-h-screen flex flex-col justify-center sm:py-12">

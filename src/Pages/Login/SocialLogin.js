@@ -2,21 +2,22 @@ import React, { useEffect } from 'react';
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useToken from '../../hooks/useToken';
 
 const SocialLogin = () => {
           const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
 
           let signInError;
-
+          const [token] = useToken(user);
           const navigate = useNavigate();
           const location = useLocation();
           let from = location.state?.from?.pathname || "/";
 
           useEffect(() => {
-                    if (user) {
+                    if (token) {
                               navigate(from, { replace: true });
                     }
-          }, [user, from, navigate])
+          }, [token, from, navigate])
 
           if (error) {
                     signInError = <p className='text-red-500'><small>{error?.message}</small></p>
@@ -28,14 +29,6 @@ const SocialLogin = () => {
                               </div>
                     );
           }
-          if (user) {
-                    return (
-                              <div>
-                                        <p>Signed In User: {user.email}</p>
-                              </div>
-                    );
-          }
-
 
           return (
                     <div>
