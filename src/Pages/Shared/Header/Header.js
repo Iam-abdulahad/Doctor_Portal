@@ -26,7 +26,7 @@ const Header = () => {
                         onClick={async () => {
                                 const success = await logout();
                                 if (success) {
-                                        alert('You are sign out');
+                                        alert('You are signed out');
                                 }
                         }}
                 >Sign Out</button> : <Link to="/login">Login</Link>}</li>
