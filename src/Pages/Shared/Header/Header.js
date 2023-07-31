@@ -2,11 +2,15 @@ import React from 'react';
 import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../../firebase.init';
+import { signOut } from 'firebase/auth';
 
 const Header = () => {
         const [user, loading, error] = useAuthState(auth);
 
-        const [signOut] = useSignOut(auth);
+        const logout = () => {
+                signOut(auth);
+                localStorage.removeItem('accessToken');
+        };
         const menuItems = <>
 
                 <li> <Link to='/'>Home</Link></li>
@@ -20,7 +24,7 @@ const Header = () => {
                 <li>{user ? <button
                         className="btn btn-ghost"
                         onClick={async () => {
-                                const success = await signOut();
+                                const success = await logout();
                                 if (success) {
                                         alert('You are sign out');
                                 }

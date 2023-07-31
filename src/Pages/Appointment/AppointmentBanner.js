@@ -22,6 +22,7 @@ const AppointmentBanner = ({ date, setDate }) => {
                                                   />
                                                   <p>You picked {format(date, 'PP')}.</p>
                                         </div>
+                                        
                               </div>
 
                     </div>

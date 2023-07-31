@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AppointmentService = ({ service, setTreatment }) => {
+const Service = ({ service, setTreatment }) => {
           const { name, slots } = service;
           return (
                     <div className="card lg:max-w-lg bg-base-100 shadow-xl">
@@ -18,11 +18,11 @@ const AppointmentService = ({ service, setTreatment }) => {
                                                             disabled={slots.length === 0}
                                                             onClick={() => setTreatment(service)}
                                                             className="btn btn-sm btn-secondary text-white uppercase bg-gradient-to-r from-secondary to-primary"
-                                                  >Book Appointment</label>
+                                                  >Book a slot</label>
                                         </div>
                               </div>
                     </div>
           );
 };
 
-export default AppointmentService;
+export default Service;
